@@ -11,8 +11,10 @@ const ShowTodos = (props) => {
             <TodoItem 
                 todo={todos[i].todo} 
                 key={todos[i].id}
-                index={i} 
+                index={i}
+                completed={todos[i].completed} 
                 handleDeleteButtonClick={props.handleDeleteButtonClick} 
+                handleOnClickCheckBox ={props.handleOnClickCheckBox} 
             />            
         );
         console.log(todos[i].todo);

@@ -8,6 +8,7 @@ class Todo extends Component {
         super(props);
         this.handleNewTodoItem = this.handleNewTodoItem.bind(this);
         this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
+        //this.handleOnClickCheckBox = this.handleOnClickCheckBox.bind(this);
 
         this.state = {
             todos: [],
@@ -20,6 +21,7 @@ class Todo extends Component {
             const todoItem = {
                 todo: todo,
                 id: Date.now().toString(),
+                completed: false,
             }
             
             //const todos = prevState.todos.concat(todoItem);
@@ -35,12 +37,40 @@ class Todo extends Component {
         const arrayIndex = Number(event.target.value);
         this.setState( prevState => {
             //todos.splice(arrayIndex, 1); Prefer not to mutate the state object
-            const todos = prevState.todos.slice(0, arrayIndex).concat(prevState.todos.slice(arrayIndex + 1));
+            let todos = prevState.todos.slice(0, arrayIndex).concat(prevState.todos.slice(arrayIndex + 1));
             return {
                 todos: prevState.todos = todos,
             }
         });
    }
+
+   /*
+   handleOnClickCheckBox(event) {
+    const arrayIndex = Number(event.target.value);
+    console.log('you touched it', arrayIndex);
+        this.setState( prevState => {
+            
+            let todos = ( 
+                prevState.todos.slice(0, arrayIndex)
+                .concat([{
+                    todo: prevState.todos[arrayIndex].todo,
+                    id: prevState.todos[arrayIndex].id,
+                    completed: prevState.todos[arrayIndex].completed = false,
+
+                }])    
+                .concat(prevState.todos.slice(arrayIndex + 1)) 
+            ); 
+
+            this.setState( (prevState) => {
+                return {
+                    todos: prevState.todos = todos,
+                }
+            });
+            
+        });
+   }
+
+   */
 
 
     render () {
@@ -50,6 +80,7 @@ class Todo extends Component {
                 <ShowTodos 
                     todos={this.state.todos} 
                     handleDeleteButtonClick={this.handleDeleteButtonClick}
+                    handleOnClickCheckBox={this.handleOnClickCheckBox}
                 />
                 <TodosCount numberOfTodos={this.state.todos.length}/>
             </div> 
